@@ -1,446 +1,290 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
 
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_decoration.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/widgets/animation/animated_fade_slide.dart';
 import '../../../../core/widgets/custom_scafold.dart';
 
-
-
 class PrivacyPolicyScreen extends StatefulWidget {
-
   const PrivacyPolicyScreen({super.key});
 
-
   @override
-  State<PrivacyPolicyScreen> createState() =>
-      _PrivacyPolicyScreenState();
-
+  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
 }
 
-
-
-class _PrivacyPolicyScreenState
-    extends State<PrivacyPolicyScreen>
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen>
     with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
 
-
-  late AnimationController _controller;
-
-
+  final List<Map<String, String>> _sections = [
+    {
+      'title': 'Your Privacy Matters',
+      'body':
+          'We at RealtyConnect respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use and protect your information while using our property services.',
+    },
+    {
+      'title': 'Information We Collect',
+      'body':
+          'We may collect information such as your name, mobile number, email address, location details, property preferences, saved properties, enquiries and other information required to provide better real estate services.',
+    },
+    {
+      'title': 'How We Use Your Information',
+      'body':
+          'Your information helps us provide property recommendations, connect buyers with dealers/owners, manage property listings, improve user experience and provide customer support.',
+    },
+    {
+      'title': 'Property Listings & User Information',
+      'body':
+          'Users who list properties are responsible for providing accurate property details. RealtyConnect may display property information to help users discover and enquire about available properties.',
+    },
+    {
+      'title': 'Location Information',
+      'body':
+          'We may use location services to provide relevant property searches based on your preferred city, locality or nearby properties. Location access can be managed from your device settings.',
+    },
+    {
+      'title': 'Third Party Services',
+      'body':
+          'RealtyConnect may use trusted third-party services for analytics, notifications, payments or communication. These services may have their own privacy policies.',
+    },
+    {
+      'title': 'Data Security',
+      'body':
+          'We implement appropriate security measures to protect your personal information. However, no online platform can guarantee complete security of data.',
+    },
+    {
+      'title': 'Your Rights',
+      'body':
+          'You can update your profile information, manage your preferences and request assistance regarding your personal data by contacting our support team.',
+    },
+    {
+      'title': 'Contact Us',
+      'body':
+          'If you have any questions regarding this Privacy Policy, please contact RealtyConnect support team.',
+    },
+  ];
 
   @override
-  void initState(){
-
+  void initState() {
     super.initState();
 
-
     _controller = AnimationController(
-
-      vsync:this,
-
-      duration:
-      const Duration(milliseconds:1200),
-
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
     );
-
 
     _controller.forward();
-
   }
 
-
-
   @override
-  void dispose(){
-
+  void dispose() {
     _controller.dispose();
-
     super.dispose();
-
   }
-
-
-
-
-
-  Widget buildAnimatedSection({
-
-    required int index,
-
-    required String title,
-
-    required String body,
-
-  }){
-
-
-    final animation =
-    Tween<Offset>(
-
-      begin:
-      const Offset(0,.25),
-
-      end:
-      Offset.zero,
-
-    ).animate(
-
-      CurvedAnimation(
-
-        parent:_controller,
-
-        curve:Interval(
-
-          index*.15,
-
-          (index*.15)+.4,
-
-          curve:Curves.easeOut,
-
-        ),
-
-      ),
-
-    );
-
-
-
-    final fadeAnimation =
-    Tween<double>(
-
-      begin:0,
-
-      end:1,
-
-    ).animate(
-
-      CurvedAnimation(
-
-        parent:_controller,
-
-        curve:Interval(
-
-          index*.15,
-
-          (index*.15)+.4,
-
-          curve:Curves.easeOut,
-
-        ),
-
-      ),
-
-    );
-
-
-
-    return FadeTransition(
-
-      opacity:fadeAnimation,
-
-
-      child:SlideTransition(
-
-        position:animation,
-
-
-        child:Column(
-
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
-
-
-          children:[
-
-
-            _TitleText(title),
-
-
-            _BodyText(body),
-
-
-          ],
-
-
-        ),
-
-      ),
-
-    );
-
-
-  }
-
-
-
 
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
     return CustomScaffold(
-
-      title:"Privacy Policy",
-
-useAppBarGradient: true,
-      body:SingleChildScrollView(
-
-
-        padding:
-        const EdgeInsets.all(16),
-
-
-        child:Column(
-
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
-
-
-          children:[
+      title: 'Privacy Policy',
+      useAppBarGradient: true,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
 
 
-            buildAnimatedSection(
+            ...List.generate(_sections.length, (index) {
+              final section = _sections[index];
 
-              index:0,
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 14),
+                child: _buildAnimatedSection(
+                  context,
+                  index: index,
+                  title: section['title']!,
+                  body: section['body']!,
+                ),
+              );
+            }),
 
-              title:"Your Privacy Matters",
+            const SizedBox(height: 8),
 
-              body:
-              "We at RealtyConnect respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use and protect your information while using our property services.",
-
+            TweenFadeSlide(
+              beginOffset: const Offset(0, 0.08),
+              child: _buildFooter(context),
             ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:1,
-
-              title:"Information We Collect",
-
-              body:
-              "We may collect information such as your name, mobile number, email address, location details, property preferences, saved properties, enquiries and other information required to provide better real estate services.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:2,
-
-              title:"How We Use Your Information",
-
-              body:
-              "Your information helps us provide property recommendations, connect buyers with dealers/owners, manage property listings, improve user experience and provide customer support.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:3,
-
-              title:"Property Listings & User Information",
-
-              body:
-              "Users who list properties are responsible for providing accurate property details. RealtyConnect may display property information to help users discover and enquire about available properties.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:4,
-
-              title:"Location Information",
-
-              body:
-              "We may use location services to provide relevant property searches based on your preferred city, locality or nearby properties. Location access can be managed from your device settings.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:5,
-
-              title:"Third Party Services",
-
-              body:
-              "RealtyConnect may use trusted third-party services for analytics, notifications, payments or communication. These services may have their own privacy policies.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:6,
-
-              title:"Data Security",
-
-              body:
-              "We implement appropriate security measures to protect your personal information. However, no online platform can guarantee complete security of data.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:7,
-
-              title:"Your Rights",
-
-              body:
-              "You can update your profile information, manage your preferences and request assistance regarding your personal data by contacting our support team.",
-
-            ),
-
-
-
-
-
-            buildAnimatedSection(
-
-              index:8,
-
-              title:"Contact Us",
-
-              body:
-              "If you have any questions regarding this Privacy Policy, please contact RealtyConnect support team.",
-
-            ),
-
-
-
-
-            const SizedBox(height:30),
-
-
           ],
-
-
         ),
-
-
       ),
-
-
     );
-
-
   }
 
-}
+  // ============================================================
+  // INTRO
+  // ============================================================
 
+  Widget _buildIntroCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: AppDecorations.primaryCard(context),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: colors.onPrimary.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.privacy_tip_outlined, color: colors.onPrimary),
+          ),
 
+          const SizedBox(width: 14),
 
-
-
-class _TitleText extends StatelessWidget {
-
-
-  final String text;
-
-
-  const _TitleText(this.text);
-
-
-
-  @override
-  Widget build(BuildContext context){
-
-
-    return Padding(
-
-      padding:
-      const EdgeInsets.only(
-        top:20,
-        bottom:8,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Your Privacy',
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: colors.onPrimary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'We value your trust and are committed to protecting your personal information.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: colors.onPrimary.withValues(alpha: 0.78),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
+    );
+  }
 
+  // ============================================================
+  // ANIMATED SECTION
+  // ============================================================
 
-      child:Text(
+  Widget _buildAnimatedSection(
+    BuildContext context, {
+    required int index,
+    required String title,
+    required String body,
+  }) {
+    final start = (index * 0.09).clamp(0.0, 0.75);
+    final end = (start + 0.35).clamp(0.0, 1.0);
 
-        text,
+    final animation = CurvedAnimation(
+      parent: _controller,
+      curve: Interval(start, end, curve: Curves.easeOutCubic),
+    );
 
-        style:
-        context.textTheme.titleMedium?.copyWith(
-
-          fontWeight:
-          FontWeight.bold,
-
-          color:
-          AppColors.primary,
-
+    return FadeTransition(
+      opacity: animation,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.12),
+          end: Offset.zero,
+        ).animate(animation),
+        child: _buildPolicyCard(
+          context,
+          index: index,
+          title: title,
+          body: body,
         ),
-
       ),
-
     );
-
-
   }
 
-}
+  // ============================================================
+  // POLICY CARD
+  // ============================================================
+
+  Widget _buildPolicyCard(
+    BuildContext context, {
+    required int index,
+    required String title,
+    required String body,
+  }) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
 
 
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
 
+              const SizedBox(height: 8),
 
-
-
-class _BodyText extends StatelessWidget {
-
-
-  final String text;
-
-
-  const _BodyText(this.text);
-
-
-
-  @override
-  Widget build(BuildContext context){
-
-
-    return Text(
-
-      text,
-
-      style:
-        TextStyle(
-
-        fontSize:13,
-
-        height:1.8,
-
-
-      ),
-
+              Text(
+                body,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colors.onSurface.withValues(alpha: 0.68),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
-
-
   }
 
+  // ============================================================
+  // FOOTER
+  // ============================================================
+
+  Widget _buildFooter(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: AppDecorations.cardDecoration(context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.info_outline_rounded, size: 18, color: colors.primary),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              'Please review this policy periodically.',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: colors.onSurface.withValues(alpha: 0.60),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

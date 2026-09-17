@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/theme/app_decoration.dart';
+import '../../../core/widgets/animation/animated_fade_slide.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_scafold.dart';
 import '../../../core/widgets/textfields/custom_textfields.dart';
@@ -13,19 +14,22 @@ class ContactUs extends GetView<ContactUsController> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      useAppBarGradient: true,
       title: "Contact Us",
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
+        child: TweenFadeSlide(
+          child: Column(
+            children: [
 
 
-            _contactForm(context),
-
-            const SizedBox(height: 16),
-
-
-          ],
+              TweenFadeSlide(child: _contactForm(context)),
+          
+              const SizedBox(height: 16),
+          
+          
+            ],
+          ),
         ),
       ),
     );

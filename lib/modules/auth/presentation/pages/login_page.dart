@@ -186,10 +186,10 @@ class SendOtpPage extends GetView<AuthController> {
                                           Icons.arrow_forward_rounded,
                                         ),
                                         onTap: () {
-                                          if (formKey.currentState!
-                                              .validate()) {
+                                          // if (formKey.currentState!
+                                          //     .validate()) {
                                             controller.verifyOtp();
-                                          }
+                                          // }
                                         },
                                       ),
 

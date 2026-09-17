@@ -105,30 +105,30 @@ class AuthController extends GetxController {
       );
       return;
     }
+    //
+    // if (!RegExp(r'^\d{6}$').hasMatch(otp)) {
+    //   Get.snackbar(
+    //     'Error',
+    //     'OTP must contain only digits',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //   );
+    //   return;
+    // }
 
-    if (!RegExp(r'^\d{6}$').hasMatch(otp)) {
-      Get.snackbar(
-        'Error',
-        'OTP must contain only digits',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      return;
-    }
-
-    /// Temporary OTP validation.
-    /// Remove this when real Verify OTP API is integrated.
-    if (sentOtp.value.isNotEmpty && otp != sentOtp.value) {
-      Get.snackbar(
-        'Error',
-        'Invalid OTP',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      return;
-    }
-
-    /// TODO: Call Verify OTP API here.
-
-    timer?.cancel();
+    // /// Temporary OTP validation.
+    // /// Remove this when real Verify OTP API is integrated.
+    // if (sentOtp.value.isNotEmpty && otp != sentOtp.value) {
+    //   Get.snackbar(
+    //     'Error',
+    //     'Invalid OTP',
+    //     snackPosition: SnackPosition.TOP,
+    //   );
+    //   return;
+    // }
+    //
+    // /// TODO: Call Verify OTP API here.
+    //
+    // timer?.cancel();
 
     Get.offAllNamed(
       AppRoutes.dashboard,

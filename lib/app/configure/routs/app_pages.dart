@@ -1,11 +1,24 @@
 import 'package:get/get.dart';
 
+import '../../../modules/activities/binding/activities_binding.dart';
+import '../../../modules/activities/screen/activities_page.dart';
 import '../../../modules/auth/binding/authbinding.dart';
 import '../../../modules/auth/presentation/pages/login_page.dart';
 import '../../../modules/callender/binding/callender_dinding.dart';
 import '../../../modules/callender/screen/callender_page.dart';
 import '../../../modules/dashboard/binding/dashboard_binding.dart';
 import '../../../modules/dashboard/presentation/page/dashboard_page.dart';
+import '../../../modules/drawer/my_courses/binding/my_courses_binding.dart';
+import '../../../modules/drawer/my_courses/screen/my_courses_page.dart';
+import '../../../modules/drawer/my_wallet/screen/add_money_page.dart';
+import '../../../modules/drawer/my_wallet/screen/payment_failed_page.dart';
+import '../../../modules/drawer/my_wallet/screen/payment_success_page.dart';
+import '../../../modules/drawer/my_wallet/screen/transaction_details_page.dart';
+import '../../../modules/drawer/my_wallet/screen/wallet_transactions_page.dart';
+import '../../../modules/drawer/performance/binding/performance_dinding.dart';
+import '../../../modules/drawer/performance/screen/performance_page.dart';
+import '../../../modules/drawer/task/binding/task_binding.dart';
+import '../../../modules/drawer/task/screen/task.dart';
 import '../../../modules/help_support/binding/help_support_binding.dart';
 import '../../../modules/help_support/screen/contact_us.dart';
 import '../../../modules/internet/binding/internet_binding.dart';
@@ -18,8 +31,12 @@ import '../../../modules/onboarding/binding/onboarding_dinding.dart';
 import '../../../modules/onboarding/screen/onboardings.dart';
 import '../../../modules/privacy_policy/presentation/page/about_us.dart';
 import '../../../modules/privacy_policy/presentation/page/privacy_policy.dart';
+import '../../../modules/profile/binding/profile_binding.dart';
+import '../../../modules/profile/screen/profile_page.dart';
 import '../../../modules/splash/binding/splash_binding.dart';
 import '../../../modules/splash/presentation/page/splash_page.dart';
+import '../../../modules/wallet/binding/wallet_binding.dart';
+import '../../../modules/wallet/presentation/page/wallet_page.dart';
 import 'app_routs.dart';
 
 class AppPages {
@@ -69,7 +86,7 @@ class AppPages {
       page: () => DashboardPage(),
       binding: DashboardBinding(),
       transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 500),
     ),
 
     GetPage(
@@ -100,56 +117,53 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-    //
-    // GetPage(
-    //   name: AppRoutes.propertyDetail,
-    //   page: () => const PropertyDetailPage(),
-    //   binding: PropertyDetailBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.Editprofile,
-    //   page: () => const UpdateProfileScreen(),
-    //   binding: UpdateProfileBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.profile,
-    //   page: () => const ProfileScreen(),
-    //   binding: UpdateProfileBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.myProperties,
-    //   page: () => const MyProprtiesPage(),
-    //   binding: MyProprtiesDinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.savedProperties,
-    //   page: () => const SavedProprties(),
-    //   binding: SavedProprtiesDinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.contactDealer,
-    //   page: () => const ContactDealerPage(),
-    //   binding: ContactDealerBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.search,
-    //   page: () => const SearchPage(),
-    //   binding: SearchBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
+
+
+    GetPage(
+      name: AppRoutes.WalletPage,
+      page: () => WalletPage(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.tasks,
+      page: () => const TasksPage(),
+      binding: TaskBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: AppRoutes.performancePage,
+      page: () => const PerformancePage(),
+      binding: PerformanceDinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+
+    GetPage(
+      name: AppRoutes.MyCourses,
+      page: () => const MyCoursesPage(),
+      binding: MyCoursesDinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+
+
+
+    GetPage(
+      name: AppRoutes.activities,
+      page: () => const ActivitiesPage(),
+      binding: ActivitiesBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+
     GetPage(
       name: AppRoutes.privacyPolicy,
       page: () => const PrivacyPolicyScreen(),
@@ -170,12 +184,39 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-    // GetPage(
-    //   name: AppRoutes.settings,
-    //   page: () => SettingsPage(),
-    //   binding: SettingsBinding(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: const Duration(milliseconds: 300),
-    // ),
+    GetPage(
+      name: AppRoutes.wallet,
+      page: () => const WalletPage(),
+      binding: WalletBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.addMoney,
+      page: () => const AddMoneyPage(),
+      binding: WalletBinding(),      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+
+    GetPage(
+      name: AppRoutes.walletTransactions,
+      page: () => const WalletTransactionsPage(),
+      binding: WalletBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.walletTransactionDetails,
+      page: () => const TransactionDetailsPage(),
+      binding: WalletBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.walletPaymentSuccess,
+      page: () => const PaymentSuccessPage(),
+    ),
+
+    GetPage(
+      name: AppRoutes.walletPaymentFailed,
+      page: () => const PaymentFailedPage(),
+    ),
   ];
 }

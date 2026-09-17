@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../app/configure/routs/app_routs.dart';
-import '../../../../core/constant/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_decoration.dart';
+
 import '../../../../core/widgets/animation/animated_fade_slide.dart';
 import '../../../../core/widgets/custom_scafold.dart';
 import '../../../../core/widgets/drawer/app_drawer.dart';
@@ -16,7 +14,6 @@ import '../../widget/home_app_bar.dart';
 import '../../widget/online_courses_section.dart';
 import '../../widget/product_help_section.dart';
 import '../../widget/quick_action_section.dart';
-import '../../widget/student_header.dart';
 import '../controller/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -24,8 +21,8 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+
+
 
     return CustomScaffold(
       showAppBar: true,
@@ -48,19 +45,19 @@ class HomePage extends GetView<HomeController> {
                 children: [
                   SizedBox(height: 12),
 
-                  QuickActionSection(),
+                  TweenFadeSlide(child: QuickActionSection()),
 
                   SizedBox(height: 18),
 
-                  AiAssistSection(),
+                  TweenFadeSlide(child: AiAssistSection()),
 
                   SizedBox(height: 18),
 
-                  ExploreAiSection(),
+                  TweenFadeSlide(child: ExploreAiSection()),
 
                   SizedBox(height: 18),
 
-                  OnlineCoursesSection(),
+                  TweenFadeSlide(child: OnlineCoursesSection()),
 
                   const SizedBox(height: 18),
                   Padding(

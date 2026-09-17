@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 
+import 'package:flutter/material.dart';
 class DrawerItemModel {
-  final IconData icon;
   final String title;
-  final String? subTitle;
-  final String? badge;
-  final bool isSwitch;
+  final IconData? icon;
+  final String? image;
   final VoidCallback? onTap;
+  final bool isSwitch;
+  final String? badge;
 
   DrawerItemModel({
-    required this.icon,
     required this.title,
-    this.subTitle,
-    this.badge,
-    this.isSwitch = false,
+    this.icon,
+    this.image,
     this.onTap,
+    this.isSwitch = false,
+    this.badge,
   });
 }

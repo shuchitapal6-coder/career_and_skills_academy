@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,18 +19,51 @@ class AppDrawerController extends GetxController {
       DrawerItemModel(
         title: "Home",
         icon: Icons.home_outlined,
-        onTap: () => Get.offAllNamed(AppRoutes.home),
+        onTap: () => Get.toNamed(AppRoutes.dashboard),
       ),
 
       DrawerItemModel(
         title: "Profile",
-        icon: Icons.person_outline,
+        icon: CupertinoIcons.person,
         onTap: () => Get.toNamed(AppRoutes.profile),
       ),
-
-
-
-
+      // DrawerItemModel(
+      //   title: "My Wallet",
+      //   icon: CupertinoIcons.creditcard_fill,
+      //   onTap: () {
+      //     // => Get.toNamed(AppRoutes.WalletPage)
+      //   },
+      // ),
+      // DrawerItemModel(
+      //   title: "Invoices & Payments",
+      //   icon: CupertinoIcons.money_dollar_circle,
+      //   onTap: () => Get.toNamed(AppRoutes.profile),
+      // ),
+      DrawerItemModel(
+        title: "Tasks",
+        icon: Icons.menu,
+        onTap: () => Get.toNamed(AppRoutes.tasks),
+      ),
+      DrawerItemModel(
+        title: "Performance",
+        icon: CupertinoIcons.person,
+        onTap: () => Get.toNamed(AppRoutes.performancePage),
+      ),
+      // DrawerItemModel(
+      //   title: "Test Result",
+      //   icon: CupertinoIcons.person,
+      //   onTap: () => Get.toNamed(AppRoutes.profile),
+      // ),
+      DrawerItemModel(
+        title: "Notification",
+        icon: CupertinoIcons.person,
+        onTap: () => Get.toNamed(AppRoutes.notification),
+      ),
+      // DrawerItemModel(
+      //   title: "Change Course",
+      //   icon: CupertinoIcons.person,
+      //   onTap: () => Get.toNamed(AppRoutes.profile),
+      // ),
 
       DrawerItemModel(
         title: "Dark Mode",
@@ -54,31 +88,25 @@ class AppDrawerController extends GetxController {
         onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
       ),
 
-      DrawerItemModel(
-        title: "Settings",
-        icon: Icons.settings_outlined,
-        onTap: () => Get.toNamed(AppRoutes.settings),
-      ),
+      // DrawerItemModel(
+      //   title: "Settings",
+      //   icon: Icons.settings_outlined,
+      //   onTap: () => Get.toNamed(AppRoutes.settings),
+      // ),
+
       // DrawerItemModel(
       //   title: "Login",
       //   icon: Icons.login,
       //   onTap: () => Get.toNamed(AppRoutes.sendOtp),
       // ),
-
-      DrawerItemModel(
-        title: "Logout",
-        icon: Icons.logout,
-        onTap: logout,
-      ),
+      DrawerItemModel(title: "Logout", icon: Icons.logout, onTap: logout),
     ];
   }
 
   void toggleTheme(bool value) {
     isDark.value = value;
 
-    Get.changeThemeMode(
-      value ? ThemeMode.dark : ThemeMode.light,
-    );
+    Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
   }
 
   void logout() {

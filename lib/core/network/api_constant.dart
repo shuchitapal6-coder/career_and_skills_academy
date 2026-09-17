@@ -26,5 +26,5 @@ class ApiConstants {
   static const String profile = "profile";
 
 
-
+  static const String WalletPage = "/WalletPage";
 }

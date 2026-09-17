@@ -34,13 +34,12 @@ class HomeController extends GetxController {
   }
 
   void openWallet() {
-    Get.snackbar(
-      'Wallet',
-      'Wallet opened',
-    );
+Get.toNamed(AppRoutes.WalletPage);
   }
 
   void openNotifications() {
+
+    
 Get.toNamed(AppRoutes.notification);
   }
   final selectedIndex = 0.obs;
@@ -59,10 +58,21 @@ Get.toNamed(AppRoutes.notification);
 
 
   void openQuickAction(String title) {
-    Get.snackbar(
-      title,
-      '$title opened',
-    );
+    switch (title) {
+      case 'My Courses':
+        Get.toNamed(AppRoutes.MyCourses);
+        break;
+
+      case 'Performance':
+  Get.toNamed(AppRoutes.performancePage);
+        break;
+
+      case 'Activities':
+        Get.toNamed(AppRoutes.activities);
+        break;   case 'PYQs':
+      // Get.to(() => ActivitiesPage());
+        break;
+    }
   }
 
   void openAiAssist() {

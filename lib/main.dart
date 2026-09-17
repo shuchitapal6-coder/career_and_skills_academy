@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Realty Connect',
+      title: 'Career & Skills Academy',
 
       initialBinding: InitialBinding(),
 

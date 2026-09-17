@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../app/configure/routs/app_routs.dart';
 import '../presentation/controller/home_controller.dart';
 
 
@@ -97,20 +98,23 @@ class HomeAppBar extends GetView<HomeController>
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      width: 42,
-                      height: 42,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.white.withOpacity(0.20),
-                        border: Border.all(
-                          color: AppColors.white.withOpacity(0.35),
+                    GestureDetector(
+                      onTap: ()=>Get.toNamed(AppRoutes.profile),
+                      child: Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.white.withOpacity(0.20),
+                          border: Border.all(
+                            color: AppColors.white.withOpacity(0.35),
+                          ),
                         ),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        color: AppColors.white,
-                        size: 27,
+                        child: const Icon(
+                          Icons.person,
+                          color: AppColors.white,
+                          size: 27,
+                        ),
                       ),
                     ),
 
