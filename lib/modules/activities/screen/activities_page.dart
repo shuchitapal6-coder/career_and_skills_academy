@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/theme/app_decoration.dart';
 import '../../../../core/widgets/empty_widget.dart';
+import '../../../core/widgets/cards/activity_card.dart';
 import '../controller/activities_controller.dart';
 
 import '../../../../core/widgets/custom_scafold.dart';
@@ -75,7 +76,7 @@ class ActivitiesPage extends GetView<ActivitiesController> {
             _ActivityHeader(
               totalActivities: activities.fold(
                 0,
-                    (sum, item) => sum + item.count,
+                (sum, item) => sum + item.count,
               ),
             ),
 
@@ -83,32 +84,30 @@ class ActivitiesPage extends GetView<ActivitiesController> {
               child: activities.isEmpty
                   ? EmptyWidget(title: "Activity", subtitle: "Empty Activity")
                   : GridView.builder(
-                padding: const EdgeInsets.fromLTRB(
-                  16,
-                  4,
-                  16,
-                  24,
-                ),
-                physics: const BouncingScrollPhysics(),
-                gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 1.12,
-                ),
-                itemCount: activities.length,
-                itemBuilder: (context, index) {
-                  final item = activities[index];
+                      padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 14,
+                            mainAxisSpacing: 14,
+                            childAspectRatio: 1.12,
+                          ),
+                      itemCount: activities.length,
+                      itemBuilder: (context, index) {
+                        final item = activities[index];
 
-                  return _ActivityCard(
-                    item: item,
-                    onTap: () {
-                      controller.openActivity(item.subject);
-                    },
-                  );
-                },
-              ),
+                        return ActivityCard(
+                          title: item.subject,
+                          count: item.count,
+                          icon: item.icon,
+                          progress: item.count / 75,
+                          onTap: () {
+                            controller.openActivity(item.subject);
+                          },
+                        );
+                      },
+                    ),
             ),
           ],
         ),
@@ -117,136 +116,10 @@ class ActivitiesPage extends GetView<ActivitiesController> {
   }
 }
 
-class _ActivityCard extends StatelessWidget {
-  final ActivityItem item;
-  final VoidCallback onTap;
-
-  const _ActivityCard({
-    required this.item,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        child: Ink(
-          decoration: AppDecorations.cardDecoration(
-            context,
-            radius: BorderRadius.circular(18),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryLight.withOpacity(.10),
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      child: Icon(
-                        item.icon,
-                        color: AppColors.primaryLight,
-                        size: 24,
-                      ),
-                    ),
-
-                    const Spacer(),
-
-                    Container(
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHighest,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward_rounded,
-                        size: 16,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const Spacer(),
-
-                Text(
-                  item.subject,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-
-                const SizedBox(height: 5),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${item.count}',
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.primaryLight,
-                      ),
-                    ),
-
-                    const SizedBox(width: 6),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Text(
-                        'Activities',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 10),
-
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: LinearProgressIndicator(
-                    value: _progressValue(item.count),
-                    minHeight: 5,
-                    backgroundColor:
-                    theme.colorScheme.surfaceContainerHighest,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  double _progressValue(int count) {
-    const maxActivities = 75;
-
-    return (count / maxActivities).clamp(0.0, 1.0);
-  }
-
-}class _ActivityHeader extends StatelessWidget {
+class _ActivityHeader extends StatelessWidget {
   final int totalActivities;
 
-  const _ActivityHeader({
-    required this.totalActivities,
-  });
+  const _ActivityHeader({required this.totalActivities});
 
   @override
   Widget build(BuildContext context) {

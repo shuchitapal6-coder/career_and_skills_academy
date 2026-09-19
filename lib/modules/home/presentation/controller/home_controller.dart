@@ -70,7 +70,7 @@ Get.toNamed(AppRoutes.notification);
       case 'Activities':
         Get.toNamed(AppRoutes.activities);
         break;   case 'PYQs':
-      // Get.to(() => ActivitiesPage());
+      Get.toNamed(AppRoutes.pyqs);
         break;
     }
   }

@@ -219,7 +219,7 @@ class OnboardingController extends GetxController {
     if (isClosed) return;
 
     Get.offAllNamed(
-      AppRoutes.sendOtp,
+      AppRoutes.dashboard,
     );
   }
 

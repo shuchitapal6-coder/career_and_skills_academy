@@ -30,7 +30,8 @@ class QuickActionSection extends GetView<HomeController> {
       ),
       const QuickActionItem(
         title: 'Performance',
-        icon: Icons.bar_chart_rounded,    image: 'assets/images/performance.png',
+        icon: Icons.bar_chart_rounded,
+        image: 'assets/images/performance.png',
       ),
       const QuickActionItem(
         title: 'Activities',
@@ -64,9 +65,7 @@ class QuickActionSection extends GetView<HomeController> {
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: AppColors.borderColor,
-                ),
+                border: Border.all(color: AppColors.borderColor),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.shadow,
@@ -85,16 +84,16 @@ class QuickActionSection extends GetView<HomeController> {
                       alignment: Alignment.center,
                       child: item.image != null
                           ? Image.asset(
-                        item.image!,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.contain,
-                      )
+                              item.image!,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.contain,
+                            )
                           : Icon(
-                        item.icon,
-                        size: 90,
-                        color: AppColors.primaryLight,
-                      ),
+                              item.icon,
+                              size: 90,
+                              color: AppColors.primaryLight,
+                            ),
                     ),
                   ),
 
@@ -107,10 +106,7 @@ class QuickActionSection extends GetView<HomeController> {
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w600,
                       ),
@@ -131,11 +127,5 @@ class QuickActionItem {
   final IconData icon;
   final String? image;
 
-  const QuickActionItem({
-    required this.title,
-    required this.icon,
-    this.image,
-  });
+  const QuickActionItem({required this.title, required this.icon, this.image});
 }
-
-

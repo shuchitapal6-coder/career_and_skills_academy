@@ -78,6 +78,8 @@ class AppRoutes {
   static const performancePage = '/PerformancePage';
   static const MyCourses = '/MyCourses';
   static const activities = '/activities';
+  static const pyqs = '/pyqs';
+  static const pyqTestPapers = '/pyq-test-papers';
 
 
 }

@@ -33,6 +33,9 @@ import '../../../modules/privacy_policy/presentation/page/about_us.dart';
 import '../../../modules/privacy_policy/presentation/page/privacy_policy.dart';
 import '../../../modules/profile/binding/profile_binding.dart';
 import '../../../modules/profile/screen/profile_page.dart';
+import '../../../modules/pyq/binding/pyq_binding.dart';
+import '../../../modules/pyq/screen/pyq_page.dart';
+import '../../../modules/pyq/screen/pyq_test_papers_page.dart';
 import '../../../modules/splash/binding/splash_binding.dart';
 import '../../../modules/splash/presentation/page/splash_page.dart';
 import '../../../modules/wallet/binding/wallet_binding.dart';
@@ -102,7 +105,8 @@ class AppPages {
       binding: NotificationBinding(),
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
-    ),    GetPage(
+    ),
+    GetPage(
       name: AppRoutes.messagePage,
       page: () => const MessagePage(),
       binding: MessageDinding(),
@@ -117,7 +121,6 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-
 
     GetPage(
       name: AppRoutes.WalletPage,
@@ -146,8 +149,6 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-
-
 
     GetPage(
       name: AppRoutes.activities,
@@ -193,7 +194,8 @@ class AppPages {
     GetPage(
       name: AppRoutes.addMoney,
       page: () => const AddMoneyPage(),
-      binding: WalletBinding(),      transition: Transition.rightToLeft,
+      binding: WalletBinding(),
+      transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
 
@@ -217,6 +219,21 @@ class AppPages {
     GetPage(
       name: AppRoutes.walletPaymentFailed,
       page: () => const PaymentFailedPage(),
+    ),
+
+    GetPage(
+      name: AppRoutes.pyqs,
+      page: () => const PyqsPage(),
+      binding: PyqBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: AppRoutes.pyqTestPapers,
+      page: () => const PyqTestPapersPage(),
+      binding: PyqBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
     ),
   ];
 }
